@@ -8,8 +8,8 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Name</td>
-                <td>@item.Brand.Name</td>
+            <td>@item.Brand.Name</td>
+            <td>@item.Name</td>  
             <td>
                 <a asp-action="Details" asp-controller="Home" asp-route-id="@item.ModelId">Подробнее</a> |
                 <a asp-action="Edit" asp-controller="Home" asp-route-id="@item.ModelId">Изменить</a> |

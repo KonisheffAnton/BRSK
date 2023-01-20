@@ -21,7 +21,7 @@ namespace BRSK.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Models.ToListAsync());
+            return View(await _context.Models.AsQueryable().Include(modelItem => modelItem.Brand).ToListAsync());
         }
         public async Task<IActionResult> Create()
         {
@@ -32,7 +32,6 @@ namespace BRSK.Controllers
         {
             var model = new Model()
             {
-               
                 BrandId = pagemodel.SelectedBrand+1,
                 Name = pagemodel.ModelName,
                 Activity = pagemodel.Activity
