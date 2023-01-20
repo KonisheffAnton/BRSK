@@ -1,14 +1,9 @@
 ﻿using BRSK.Data;
 using BRSK.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BRSK.Controllers
 {
@@ -22,19 +17,26 @@ namespace BRSK.Controllers
 
         }
 
-       
 
-public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index()
         {
             return View(await _context.Models.ToListAsync());
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            return View(new PageModel { BrandList = new SelectList(await _context.Brands.ToListAsync(), "BrandId", "Name") });
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Model model)
+        public async Task<IActionResult> Create(PageModel pagemodel)
         {
+            var model = new Model()
+            {
+               
+                BrandId = pagemodel.SelectedBrand+1,
+                Name = pagemodel.ModelName,
+                Activity = pagemodel.Activity
+            };
             _context.Models.Add(model);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
