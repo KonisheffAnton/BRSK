@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BRSK.Controllers
 {
@@ -18,9 +19,12 @@ namespace BRSK.Controllers
         public HomeController(BRSKApplicationContext context)
         {
             _context = context;
+
         }
 
-        public async Task<IActionResult> Index()
+       
+
+public async Task<IActionResult> Index()
         {
             return View(await _context.Models.ToListAsync());
         }
@@ -39,7 +43,7 @@ namespace BRSK.Controllers
         {
             if (id != null)
             {
-                Model model = await _context.Models.FirstOrDefaultAsync(modelItem => modelItem.Id == id);
+                Model model = await _context.Models.FirstOrDefaultAsync(modelItem => modelItem.ModelId == id);
                 if (model != null)
                     return View(model);
             }
@@ -49,7 +53,7 @@ namespace BRSK.Controllers
         {
             if (id != null)
             {
-                Model model = await _context.Models.FirstOrDefaultAsync(modelItem => modelItem.Id == id);
+                Model model = await _context.Models.FirstOrDefaultAsync(modelItem => modelItem.ModelId == id);
                 if (model != null)
                     return View(model);
             }
@@ -69,7 +73,7 @@ namespace BRSK.Controllers
         {
             if (id != null)
             {
-                Model model = await _context.Models.FirstOrDefaultAsync(modelItem => modelItem.Id == id);
+                Model model = await _context.Models.FirstOrDefaultAsync(modelItem => modelItem.ModelId == id);
                 if (model != null)
                     return View(model);
             }
@@ -81,7 +85,7 @@ namespace BRSK.Controllers
         {
             if (id != null)
             {
-                Model model = await _context.Models.FirstOrDefaultAsync(p => p.Id == id);
+                Model model = await _context.Models.FirstOrDefaultAsync(modelItem => modelItem.ModelId == id);
                 if (model != null)
                 {
                     _context.Models.Remove(model);
