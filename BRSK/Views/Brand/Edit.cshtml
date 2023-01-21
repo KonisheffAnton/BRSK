@@ -1,0 +1,18 @@
+﻿@model BRSK.Models.Brand
+@{
+    ViewBag.Title = "Редактирование марки автомобилей";
+}
+<form asp-action="edit" asp-controller="Brand" asp-route-id="@Model.BrandId">
+    <div class="form-group">
+        <input asp-for="BrandId" type="hidden" />
+        <label asp-for="Name" class="control-label">Наименование</label>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Activity" class="control-label">Наличие</label>
+        <input type="checkbox" asp-for="Activity" value="true" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Сохранить" class="btn btn-default" />
+    </div>
+</form>

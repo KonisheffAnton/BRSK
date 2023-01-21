@@ -3,6 +3,7 @@ using BRSK.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BRSK.Controllers
@@ -21,25 +22,26 @@ namespace BRSK.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Models.AsQueryable().Include(modelItem => modelItem.Brand).ToListAsync());
+            var ModelList = await _context.Models.AsQueryable().Include(modelItem => modelItem.Brand).ToListAsync();
+            return View(ModelList.OrderBy(item => item.Brand.Name).ToList());
         }
-        public async Task<IActionResult> Create()
-        {
-            return View(new PageModel { BrandList = new SelectList(await _context.Brands.ToListAsync(), "BrandId", "Name") });
-        }
-        [HttpPost]
-        public async Task<IActionResult> Create(PageModel pagemodel)
-        {
-            var model = new Model()
-            {
-                BrandId = pagemodel.SelectedBrand+1,
-                Name = pagemodel.ModelName,
-                Activity = pagemodel.Activity
-            };
-            _context.Models.Add(model);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+        //public async Task<IActionResult> Create()
+        //{
+        //    return View(new PageModel { BrandList = new SelectList(await _context.Brands.ToListAsync(), "BrandId", "Name") });
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> Create(PageModel pagemodel)
+        //{
+        //    var model = new Model()
+        //    {
+        //        BrandId = pagemodel.SelectedBrand+1,
+        //        Name = pagemodel.ModelName,
+        //        Activity = pagemodel.Activity
+        //    };
+        //    _context.Models.Add(model);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction("Index");
+        //}
         public async Task<IActionResult> Details(int? id)
         {
             if (id != null)

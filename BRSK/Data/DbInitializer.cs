@@ -9,10 +9,30 @@ namespace BRSK.Data
         {
             context.Database.EnsureCreated();
 
+            if (!context.Brands.Any())
+            {
+                var brands = new Brand[]
+               {
+            new Brand{Name="Toyota",Activity=true},
+            new Brand{Name="BMW",Activity=true},
+            new Brand{Name="Lada",Activity=true},
+            new Brand{Name="Mersedes",Activity=true},
+            new Brand{Name="Volvo",Activity=true},
+            new Brand{Name="Miscubishi",Activity=true},
+            new Brand{Name="Audi",Activity=true},
+            new Brand{Name="Vaz",Activity=true}
+               };
+                foreach (Brand item in brands)
+                {
+                    context.Brands.Add(item);
+                }
+                context.SaveChanges();
+            }
             if (!context.Models.Any())
             {
-                var models = new Model[]
-           {
+                {
+                    var models = new Model[]
+               {
             new Model{BrandId=1,Name="Toyota Corolla",Activity=true},
             new Model{BrandId=1,Name="Toyota Land Cruiser",Activity=true},
             new Model{BrandId=1,Name="Toyota Camry",Activity=true},
@@ -38,29 +58,13 @@ namespace BRSK.Data
             new Model{BrandId=8,Name="Vaz 2101",Activity=true},
             new Model{BrandId=8,Name="Zhiguly",Activity=true}
 
-           };
-                foreach (Model item in models)
-                {
-                    context.Models.Add(item);
+               };
+                    foreach (Model item in models)
+                    {
+                        context.Models.Add(item);
+                    }
+                    context.SaveChanges();
                 }
-              //  context.SaveChanges();
-
-                var brands = new Brand[]
-                {
-            new Brand{Name="Toyota",Activity=true},
-            new Brand{Name="BMW",Activity=true},
-            new Brand{Name="Lada",Activity=true},
-            new Brand{Name="Mersedes",Activity=true},
-            new Brand{Name="Volvo",Activity=true},
-            new Brand{Name="Miscubishi",Activity=true},
-            new Brand{Name="Audi",Activity=true},
-            new Brand{Name="Vaz",Activity=true}
-                };
-                foreach (Brand item in brands)
-                {
-                    context.Brands.Add(item);
-                }
-                context.SaveChanges();
             }
         }
     }

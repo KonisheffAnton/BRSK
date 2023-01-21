@@ -1,0 +1,26 @@
+﻿@model IEnumerable<BRSK.Models.Model>
+@{
+    ViewBag.Title = "Все модели машин";
+}
+<a asp-action="Create">Добавить модель</a>
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (item.Activity == false)
+            {
+                <td style="color: lightgray">@item.Name</td>
+            }
+            else
+            {
+                <td>@item.Name</td>
+            } 
+            <td>
+                <a asp-action="Details" asp-controller="Model" asp-route-id="@item.ModelId">Подробнее</a> |
+                <a asp-action="Edit" asp-controller="Model" asp-route-id="@item.ModelId">Изменить</a> |
+                <a asp-action="Delete" asp-controller="Model" asp-route-id="@item.ModelId">Удалить</a>
+            </td>
+        </tr>
+    }
+</table>

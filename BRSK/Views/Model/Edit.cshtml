@@ -2,12 +2,12 @@
 @{
     ViewBag.Title = "Редактирование модели машины";
 }
-<form asp-action="edit" asp-controller="home" asp-route-id="@Model.ModelId">
+<form asp-action="edit" asp-controller="Model" asp-route-id="@Model.ModelId">
     <div class="form-group">
-       <input asp-for="ModelId" type="hidden" />
+        <input asp-for="ModelId" type="hidden" />
         <label asp-for="Name" class="control-label">Наименование</label>
         <input type="text" asp-for="Name" class="form-control" />
-      <label asp-for="BrandId" class="control-label">BrendId</label>
+        <label asp-for="BrandId" class="control-label">BrendId</label>
         <input type="text" asp-for="BrandId" class="form-control" />
     </div>
   
