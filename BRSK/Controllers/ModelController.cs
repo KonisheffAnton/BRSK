@@ -40,16 +40,7 @@ namespace BRSK.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id != null)
-            {
-                Model model = await _context.Models.FirstOrDefaultAsync(modelItem => modelItem.ModelId == id);
-                if (model != null)
-                    return View(model);
-            }
-            return NotFound();
-        }
+      
         public async Task<IActionResult> Edit(int? id)
         {
             if (id != null)

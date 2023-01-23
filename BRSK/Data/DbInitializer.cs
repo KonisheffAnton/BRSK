@@ -22,10 +22,7 @@ namespace BRSK.Data
             new Brand{Name="Audi",Activity=true},
             new Brand{Name="Vaz",Activity=true}
                };
-                foreach (Brand item in brands)
-                {
-                    context.Brands.Add(item);
-                }
+                context.Brands.AddRange(brands); 
                 context.SaveChanges();
             }
             if (!context.Models.Any())
@@ -59,11 +56,7 @@ namespace BRSK.Data
             new Model{BrandId=8,Name="Zhiguly",Activity=true}
 
                };
-                    foreach (Model item in models)
-                    {
-                        context.Models.Add(item);
-                    }
-                    context.SaveChanges();
+                    context.Models.AddRange(models);                 
                 }
             }
         }
